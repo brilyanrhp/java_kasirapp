@@ -52,6 +52,7 @@ public class KasirApp extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("KasirApp");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setUndecorated(true);
         setResizable(false);
@@ -84,6 +85,7 @@ public class KasirApp extends javax.swing.JFrame {
 
         jLabel1.setText("KasirApp by Brilyan v1.0");
 
+        txtPegawai.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         txtPegawai.setText("jLabel2");
 
         btnClose.setText("Close");
@@ -93,7 +95,8 @@ public class KasirApp extends javax.swing.JFrame {
             }
         });
 
-        txtPegawai1.setText("Nama Pegawai :");
+        txtPegawai1.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
+        txtPegawai1.setText("Selamat Datang,");
 
         jLabel2.setIcon(new javax.swing.ImageIcon("C:\\Users\\moo\\Pictures\\Kasir.png")); // NOI18N
 

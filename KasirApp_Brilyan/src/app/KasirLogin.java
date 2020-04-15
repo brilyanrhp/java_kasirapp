@@ -35,7 +35,7 @@ public class KasirLogin extends javax.swing.JFrame {
         tfPassword = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Login KasirApp");
+        setTitle("Login");
         setResizable(false);
 
         jLabel1.setFont(new java.awt.Font("Consolas", 3, 18)); // NOI18N

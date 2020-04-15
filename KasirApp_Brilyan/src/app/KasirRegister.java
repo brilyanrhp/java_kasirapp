@@ -41,6 +41,7 @@ public class KasirRegister extends javax.swing.JFrame {
         cekAdmin = new javax.swing.JRadioButton();
         cekPegawai = new javax.swing.JRadioButton();
 
+        setTitle("Register");
         setResizable(false);
 
         jLabel1.setFont(new java.awt.Font("Consolas", 0, 18)); // NOI18N
@@ -111,9 +112,7 @@ public class KasirRegister extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(94, 94, 94)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(cekAdmin)
-                        .addGap(129, 129, 129))
+                    .addComponent(cekAdmin)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(129, 129, 129)
                         .addComponent(cekPegawai)))

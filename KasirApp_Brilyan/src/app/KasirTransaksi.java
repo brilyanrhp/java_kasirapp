@@ -56,6 +56,8 @@ public class KasirTransaksi extends javax.swing.JFrame {
         cbNama = new javax.swing.JComboBox<>();
         jLabel5 = new javax.swing.JLabel();
 
+        setTitle("Transaksi");
+
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel1.setText("Nama Barang");
 

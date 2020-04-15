@@ -398,4 +398,38 @@ public class Connect {
         } catch (Exception e) {
         }
     }
+    
+    public int getCountFilter(String karakter){
+        int rowcount = 0;
+        try {
+            String q = "select count(*) as jumlah from barang where nama_barang like '%"+karakter+"%'";
+            Statement sta = con.createStatement();
+            ResultSet rs1 = sta.executeQuery(q);
+            rs1.next();
+            rowcount = rs1.getInt("jumlah");
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return rowcount;
+    }
+    
+    public Object[][] filterBarang(String karakter){
+        Object[][] data = new Object[1000][4];
+        try {
+            Statement sta = con.createStatement();
+            ResultSet rsa = sta.executeQuery("select * from barang where nama_barang like '%"+karakter+"%'");
+            int i = 0;
+            
+            while(rsa.next()){
+                data[i][0] = rsa.getString("id_barang");
+                data[i][1] = rsa.getString("nama_barang");
+                data[i][2] = rsa.getString("harga_barang");
+                data[i][3] = rsa.getString("stok");
+                i++;
+            }
+            
+        } catch (Exception e) {
+        }
+        return data;
+    }
 }

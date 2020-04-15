@@ -8,10 +8,13 @@ package app;
 import db.Connect;
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
+import javax.swing.RowFilter;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
+import com.placeholder.PlaceHolder;
 
 /**
  *
@@ -28,6 +31,7 @@ public class KasirBarang extends javax.swing.JFrame {
         initComponents();
         this.viewData();
         this.pilih();
+        this.setPlaceholder();
         tfId.setEditable(false);
     }
 
@@ -57,6 +61,7 @@ public class KasirBarang extends javax.swing.JFrame {
         btnHapus = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbBarang = new javax.swing.JTable();
+        tfSearch = new javax.swing.JTextField();
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel1.setText("Id Barang");
@@ -116,6 +121,12 @@ public class KasirBarang extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tbBarang);
 
+        tfSearch.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tfSearchKeyReleased(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -151,21 +162,23 @@ public class KasirBarang extends javax.swing.JFrame {
                     .addComponent(btnUbah, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnHapus, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 382, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 490, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 490, Short.MAX_VALUE)
+                    .addComponent(tfSearch))
                 .addContainerGap(30, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(36, 36, 36)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 528, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel5)
+                    .addComponent(tfId, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tfSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel5)
-                            .addComponent(tfId, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
                             .addComponent(jLabel6)
@@ -186,8 +199,8 @@ public class KasirBarang extends javax.swing.JFrame {
                         .addComponent(btnUbah, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(btnHapus, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(19, 19, 19)))
-                .addContainerGap(22, Short.MAX_VALUE))
+                        .addContainerGap(41, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1)))
         );
 
         pack();
@@ -257,6 +270,19 @@ public class KasirBarang extends javax.swing.JFrame {
         System.out.println("hapus sukses");
     }//GEN-LAST:event_btnHapusActionPerformed
 
+    private void tfSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfSearchKeyReleased
+        // TODO add your handling code here:
+        String karakter = tfSearch.getText();
+        Connect c = new Connect();
+        DefaultTableModel mod = (DefaultTableModel) tbBarang.getModel();
+        Object[][] data = c.filterBarang(karakter);
+        mod.setRowCount(0);
+        for(int i = 0; i < c.getCountFilter (karakter); i++){
+            Object[] row = new Object[]{data[i][0], data[i][1], data[i][2], data[i][3]};
+            mod.addRow(row);
+        }
+    }//GEN-LAST:event_tfSearchKeyReleased
+
     /**
      * @param args the command line arguments
      */
@@ -309,6 +335,7 @@ public class KasirBarang extends javax.swing.JFrame {
     private javax.swing.JTextField tfHarga;
     private javax.swing.JTextField tfId;
     private javax.swing.JTextField tfNama;
+    private javax.swing.JTextField tfSearch;
     private javax.swing.JTextField tfStok;
     // End of variables declaration//GEN-END:variables
     
@@ -352,6 +379,8 @@ public class KasirBarang extends javax.swing.JFrame {
         rowSel.addListSelectionListener(new MyList());
     }
     
-    
+    private void setPlaceholder(){
+        PlaceHolder p1 = new PlaceHolder(tfSearch, "Cari Nama Barang...");
+    }
 }
 
